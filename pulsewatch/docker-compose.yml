@@ -1,0 +1,66 @@
+version: "3.7"
+
+# PulseWatch — Umbrel Community App
+# Uses Umbrel's standard environment variables:
+#   $APP_DATA_DIR   — persistent storage path (survives updates)
+#   $APP_PASSWORD   — auto-generated password by Umbrel
+#   $APP_DOMAIN     — your Umbrel's domain/IP
+#   $TOR_PROXY_IP   — Tor proxy address (if torOnly: true)
+
+services:
+  app:
+    image: ghcr.io/YOUR-GITHUB-USERNAME/pulsewatch:4.0.0
+    # If you're building locally instead of using a registry:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    container_name: pulsewatch_app
+    restart: unless-stopped
+    stop_grace_period: 1m
+
+    environment:
+      # Umbrel-injected: auto-generated secure password for the default "admin" account
+      - APP_PASSWORD=$APP_PASSWORD
+      # Flask secret key — derived from APP_PASSWORD for reproducibility
+      - SECRET_KEY=${APP_PASSWORD}pulsewatch-secret-salt
+      # SQLite database stored in Umbrel's persistent app data directory
+      - DB_PATH=$APP_DATA_DIR/pulsewatch.db
+      # Port PulseWatch listens on inside the container
+      - PORT=4000
+      # Pass through the Umbrel domain so heartbeat URLs are correct
+      - UMBREL_DOMAIN=${APP_DOMAIN:-umbrel.local}
+      # Python output unbuffered (important for docker logs)
+      - PYTHONUNBUFFERED=1
+
+    volumes:
+      # Persistent data — survives app updates, Umbrel restarts, and container recreation
+      - ${APP_DATA_DIR}/data:/data
+      # Docker socket — enables the container auto-restart feature
+      # Mount read-only for safety
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+    ports:
+      # Umbrel port mapping: host port 4000 → container port 4000
+      - "${APP_PORT:-4000}:4000"
+
+    networks:
+      - default
+
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:4000/favicon.svg', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+    # Resource limits — be a good Umbrel citizen
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 64M
+
+networks:
+  default:
+    name: pulsewatch_default

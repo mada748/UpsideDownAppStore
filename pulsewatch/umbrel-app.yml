@@ -1,0 +1,90 @@
+manifestVersion: 1
+id: pulsewatch
+disabled: false
+name: PulseWatch
+tagline: Self-hosted uptime monitoring with status pages & alerts
+icon: https://raw.githubusercontent.com/YOUR-GITHUB-USERNAME/umbrel-pulsewatch/main/pulsewatch/icon.svg
+category: monitoring
+version: "4.0.0"
+port: 4000
+description: >-
+  PulseWatch is a lightweight, self-hosted uptime monitor inspired by Uptime Kuma — built entirely in a single Python file with no external dependencies beyond pip packages.
+
+
+  MONITORS
+
+  Add HTTP/HTTPS monitors that ping your services on a configurable interval (30 seconds to 24 hours). Each monitor tracks status, response time, and 7-day uptime percentage. Heartbeat monitors let push-based services report their own health by calling a unique URL.
+
+
+  STATUS PAGES
+
+  Create beautiful public status pages at /status/your-slug — no domain required, they work on your Umbrel's local IP or Tor address. Each page supports announcements, incident banners, maintenance notices, and RSS + Atom feeds. Status pages include dark mode toggle.
+
+
+  INCIDENTS
+
+  Manually create incidents with three severity levels: Degraded Performance, Major Outage, and Full Outage. Post timestamped updates as you investigate. PulseWatch can also auto-create and auto-resolve incidents based on monitor state changes.
+
+
+  MAINTENANCE WINDOWS
+
+  Schedule planned downtime windows. Monitors in maintenance mode suppress alerts and show a purple "maintenance" badge. Upcoming and active windows appear on your public status pages.
+
+
+  NOTIFICATIONS
+
+  Send alerts to Discord via webhooks, or to any HTTP endpoint via generic webhooks (with optional HMAC-SHA256 signing). Configure per-event toggles and cooldown periods to prevent notification spam.
+
+
+  ANALYTICS
+
+  View response-time charts, average ping gauge, 7-day uptime history, and server resource metrics (CPU, RAM, disk) on the Analytics page.
+
+
+  DOCKER INTEGRATION
+
+  Link any monitor to a Docker container by name. When a monitor fails N consecutive times, PulseWatch automatically restarts the linked container via the Docker socket — no extra configuration needed beyond mounting the socket.
+
+
+  SECURITY
+
+  Supports two-factor authentication (TOTP — Google Authenticator, Authy, etc.) and per-monitor HTTP Basic Auth for password-protected endpoints.
+
+
+  ANDROID APP
+
+  Visit http://umbrel.local:4000/app in Chrome on Android and tap "Add to Home Screen" to install PulseWatch as a native-feeling Android app (PWA) with offline support and pull-to-refresh.
+
+
+  DATA
+
+  All data is stored in a SQLite database file in your Umbrel app data directory — no external database container required. The database persists across app updates and restarts.
+
+developer: PulseWatch
+website: https://github.com/YOUR-GITHUB-USERNAME/umbrel-pulsewatch
+submitter: YOUR-GITHUB-USERNAME
+submission: https://github.com/YOUR-GITHUB-USERNAME/umbrel-pulsewatch
+repo: https://github.com/YOUR-GITHUB-USERNAME/umbrel-pulsewatch
+support: https://github.com/YOUR-GITHUB-USERNAME/umbrel-pulsewatch/issues
+gallery:
+  - https://raw.githubusercontent.com/YOUR-GITHUB-USERNAME/umbrel-pulsewatch/main/pulsewatch/gallery/1.png
+  - https://raw.githubusercontent.com/YOUR-GITHUB-USERNAME/umbrel-pulsewatch/main/pulsewatch/gallery/2.png
+  - https://raw.githubusercontent.com/YOUR-GITHUB-USERNAME/umbrel-pulsewatch/main/pulsewatch/gallery/3.png
+path: ""
+defaultUsername: admin
+defaultPassword: $APP_PASSWORD
+torOnly: false
+permissions:
+  - STORAGE_DOWNLOADS
+releaseNotes: >-
+  Initial release of PulseWatch for Umbrel.
+  
+  - HTTP & heartbeat monitors
+  - Public status pages with RSS/Atom feeds
+  - Incident management with severity levels
+  - Maintenance window scheduling
+  - Discord & generic webhook notifications
+  - Two-factor authentication
+  - Docker container auto-restart
+  - Server resource metrics (CPU, RAM, disk)
+  - Android PWA at /app

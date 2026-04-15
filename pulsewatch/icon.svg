@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Background with rounded corners -->
+  <rect width="512" height="512" rx="112" ry="112" fill="#0a0d14"/>
+
+  <!-- Outer glow ring -->
+  <circle cx="256" cy="256" r="196" fill="none" stroke="#1e3a6e" stroke-width="4" opacity="0.6"/>
+
+  <!-- Main radar circle -->
+  <circle cx="256" cy="256" r="176" fill="none" stroke="#3b82f6" stroke-width="12"/>
+
+  <!-- Inner ring -->
+  <circle cx="256" cy="256" r="110" fill="none" stroke="#1e40af" stroke-width="3" opacity="0.5"/>
+  <circle cx="256" cy="256" r="55"  fill="none" stroke="#1e40af" stroke-width="2" opacity="0.3"/>
+
+  <!-- Cross hairs -->
+  <line x1="256" y1="80"  x2="256" y2="148" stroke="#3b82f6" stroke-width="12" stroke-linecap="round"/>
+  <line x1="256" y1="364" x2="256" y2="432" stroke="#3b82f6" stroke-width="12" stroke-linecap="round"/>
+  <line x1="80"  y1="256" x2="148" y2="256" stroke="#3b82f6" stroke-width="12" stroke-linecap="round"/>
+  <line x1="364" y1="256" x2="432" y2="256" stroke="#3b82f6" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Diagonal tick marks -->
+  <line x1="154" y1="154" x2="174" y2="174" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <line x1="358" y1="154" x2="338" y2="174" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <line x1="154" y1="358" x2="174" y2="338" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <line x1="358" y1="358" x2="338" y2="338" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Center dot — main filled -->
+  <circle cx="256" cy="256" r="36" fill="#1e3a6e"/>
+  <circle cx="256" cy="256" r="26" fill="#3b82f6"/>
+  <circle cx="256" cy="256" r="14" fill="#0a0d14"/>
+  <circle cx="256" cy="256" r="7"  fill="#60a5fa"/>
+
+  <!-- Radar sweep arc (static representation) -->
+  <path d="M256,256 L256,80 A176,176 0 0,1 432,256 Z"
+        fill="url(#sweep)" opacity="0.12"/>
+
+  <!-- Ping dot on the ring -->
+  <circle cx="432" cy="256" r="10" fill="#22d3a4" opacity="0.9">
+    <animate attributeName="opacity" values="0.9;0.2;0.9" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="432" cy="256" r="18" fill="none" stroke="#22d3a4" stroke-width="2" opacity="0.4">
+    <animate attributeName="r" values="10;22;10" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;0;0.5" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <defs>
+    <radialGradient id="sweep" cx="256" cy="256" r="176" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#3b82f6" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
